@@ -12,18 +12,20 @@ import java.util.List;
 
 public class SentenceHandler implements CustomHandler {
     private CustomHandler successor = new LexemeHandler();
-    private final static String SENTENCES_DELIMITER_PATTERN = "\"[^.!?\\\\s][^.!?]*(?:[.!?](?!['\\\"]?\\\\s|$)[^.!?]*)*[.!?]?['\\\"]?(?=\\\\s|$)";
+    private final static String SENTENCES_DELIMITER_PATTERN = "(?<=[.!?])\\s* ";
     @Override
     public List<TextComponent> handleRequest(String source) throws InteractionException {
         List<TextComponent> sentences = new ArrayList<>();
         List<String> sentencesInString = Arrays.asList(source.split(SENTENCES_DELIMITER_PATTERN).clone());
         int sentencesLoopCounter = 0;
         for(String o : sentencesInString){
-            sentences.add(new TextComposite(TextElementName.SENTENCE));
-            for(TextComponent s : successor.handleRequest(o)){
-                sentences.get(sentencesLoopCounter).addChild(s);
+            if(!o.equals("\n")){
+                sentences.add(new TextComposite(TextElementName.SENTENCE));
+                for(TextComponent s : successor.handleRequest(o)){
+                    sentences.get(sentencesLoopCounter).addChild(s);
+                }
+                sentencesLoopCounter++;
             }
-            sentencesLoopCounter++;
         }
         return sentences;
     }

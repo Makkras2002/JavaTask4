@@ -19,11 +19,13 @@ public class LexemeHandler implements CustomHandler {
         List<String> lexemesInString = Arrays.asList(source.split(LEXEMES_DELIMITER_PATTERN).clone());
         int lexemesLoopCounter = 0;
         for(String o : lexemesInString){
-            lexemes.add(new TextComposite(TextElementName.LEXEME));
-            for(TextComponent s : successor.handleRequest(o)){
-                lexemes.get(lexemesLoopCounter).addChild(s);
+            if(!o.equals("")){
+                lexemes.add(new TextComposite(TextElementName.LEXEME));
+                for(TextComponent s : successor.handleRequest(o)){
+                    lexemes.get(lexemesLoopCounter).addChild(s);
+                }
+                lexemesLoopCounter++;
             }
-            lexemesLoopCounter++;
         }
         return lexemes;
     }

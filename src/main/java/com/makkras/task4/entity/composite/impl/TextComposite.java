@@ -18,7 +18,7 @@ public class TextComposite implements TextComponent {
         String text ="";
         for (TextComponent component : components){
             if(component.getElementName() == TextElementName.PARAGRAPH){
-                text = text.concat("    " + component.conversionOperation() + component.getElementName().getValue());
+                text = text.concat(component.getElementName().getValue() +"    " + component.conversionOperation() );
             }else {
                 text = text.concat(component.conversionOperation() + component.getElementName().getValue());
             }

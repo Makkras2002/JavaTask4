@@ -1,8 +1,8 @@
 package com.makkras.task4.parser.impl;
 
-import com.makkras.task4.entity.composite.TextComponent;
-import com.makkras.task4.entity.composite.impl.TextComposite;
-import com.makkras.task4.entity.textenum.TextElementName;
+import com.makkras.task4.entity.TextComponent;
+import com.makkras.task4.entity.TextComposite;
+import com.makkras.task4.entity.TextElementName;
 import com.makkras.task4.exception.InteractionException;
 import com.makkras.task4.parser.CustomHandler;
 
@@ -13,16 +13,17 @@ import java.util.List;
 public class SentenceHandler implements CustomHandler {
     private CustomHandler successor = new LexemeHandler();
     private final static String SENTENCES_DELIMITER_PATTERN = "(?<=[.!?])\\s* ";
+    private final static String NEW_LINE_PATTERN = "\n";
     @Override
-    public List<TextComponent> handleRequest(String source) throws InteractionException {
+    public List<TextComponent> handleRequest(String source){
         List<TextComponent> sentences = new ArrayList<>();
         List<String> sentencesInString = Arrays.asList(source.split(SENTENCES_DELIMITER_PATTERN).clone());
         int sentencesLoopCounter = 0;
-        for(String o : sentencesInString){
-            if(!o.equals("\n")){
+        for(String sentence : sentencesInString){
+            if(!sentence.equals(NEW_LINE_PATTERN)){
                 sentences.add(new TextComposite(TextElementName.SENTENCE));
-                for(TextComponent s : successor.handleRequest(o)){
-                    sentences.get(sentencesLoopCounter).addChild(s);
+                for(TextComponent lexeme : successor.handleRequest(sentence)){
+                    sentences.get(sentencesLoopCounter).addChild(lexeme);
                 }
                 sentencesLoopCounter++;
             }

@@ -1,4 +1,4 @@
-package com.makkras.task4.fileop;
+package com.makkras.task4.fileinteraction;
 
 import com.makkras.task4.exception.InteractionException;
 

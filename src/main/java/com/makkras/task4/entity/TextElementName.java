@@ -1,8 +1,8 @@
-package com.makkras.task4.entity.textenum;
+package com.makkras.task4.entity;
 
 public enum TextElementName {
     TEXT ("\n"),
-    PARAGRAPH ("\n"),
+    PARAGRAPH ("\n    "),
     SENTENCE (""),
     LEXEME (" "),
     LETTER (""),

@@ -1,6 +1,6 @@
 package com.makkras.task4.service.comparator;
 
-import com.makkras.task4.entity.composite.TextComponent;
+import com.makkras.task4.entity.TextComponent;
 
 import java.util.Comparator;
 

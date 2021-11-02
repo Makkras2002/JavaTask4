@@ -1,10 +1,9 @@
-package com.makkras.task4.fileop.impl;
+package com.makkras.task4.fileinteraction.impl;
 
 import com.makkras.task4.exception.InteractionException;
-import com.makkras.task4.fileop.CustomReader;
+import com.makkras.task4.fileinteraction.CustomReader;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;

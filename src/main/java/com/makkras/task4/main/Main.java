@@ -1,8 +1,8 @@
 package com.makkras.task4.main;
 
-import com.makkras.task4.entity.composite.TextComponent;
+import com.makkras.task4.entity.TextComponent;
 import com.makkras.task4.exception.InteractionException;
-import com.makkras.task4.fileop.impl.CustomFileReader;
+import com.makkras.task4.fileinteraction.impl.CustomFileReader;
 import com.makkras.task4.parser.impl.TextHandler;
 import com.makkras.task4.service.impl.TextCompositeService;
 import org.apache.logging.log4j.LogManager;
@@ -15,8 +15,9 @@ public class Main {
         TextHandler handler = new TextHandler();
         try {
             TextComponent textComposite = handler.handleRequest(CustomFileReader.getInstance().readDataFromFile("filesrc/text.txt")).get(0);
-//            TextCompositeService.getInstance().removeFromTextSentencesWithWordAmountLessThenWritten(7,textComposite);
             logger.info(textComposite.conversionOperation());
+//            TextCompositeService.getInstance().removeFromTextSentencesWithWordAmountLessThenWritten(7,textComposite);
+//            logger.info(textComposite.conversionOperation());
 //            TextCompositeService.getInstance().sortParagraphsInTextCompositeBySentenceAmount(textComposite);
 //            logger.info(textComposite.conversionOperation());
 //            TextComponent sentence = TextCompositeService.getInstance().findSentenceWithTheLongestWord(textComposite);

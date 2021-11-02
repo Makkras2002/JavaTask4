@@ -1,7 +1,4 @@
-package com.makkras.task4.entity.composite.impl;
-
-import com.makkras.task4.entity.composite.TextComponent;
-import com.makkras.task4.entity.textenum.TextElementName;
+package com.makkras.task4.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +15,7 @@ public class TextComposite implements TextComponent {
         String text ="";
         for (TextComponent component : components){
             if(component.getElementName() == TextElementName.PARAGRAPH){
-                text = text.concat(component.getElementName().getValue() +"    " + component.conversionOperation() );
+                text = text.concat(component.getElementName().getValue() + component.conversionOperation() );
             }else {
                 text = text.concat(component.conversionOperation() + component.getElementName().getValue());
             }

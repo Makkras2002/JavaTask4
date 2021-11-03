@@ -8,6 +8,8 @@ import com.makkras.task4.service.impl.TextCompositeService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Map;
+
 public class Main {
     private  static Logger logger = LogManager.getLogger();
     public static void main(String[] args) {
@@ -16,6 +18,13 @@ public class Main {
         try {
             TextComponent textComposite = handler.handleRequest(CustomFileReader.getInstance().readDataFromFile("filesrc/text.txt")).get(0);
             logger.info(textComposite.conversionOperation());
+            logger.info(TextCompositeService.getInstance().countNumberOfConsonantsAndVowelsInSentence(5,1,textComposite));
+//            Map<TextComponent,Integer> wordMap = TextCompositeService.getInstance().findRepetitiveWordsAndTheirNumber(textComposite);
+//            for (TextComponent a : wordMap.keySet()){
+//                if(wordMap.get(a) >1){
+//                    logger.info("\"" + a.conversionOperation() + "\": "+ wordMap.get(a));
+//                }
+//            }
 //            TextCompositeService.getInstance().removeFromTextSentencesWithWordAmountLessThenWritten(7,textComposite);
 //            logger.info(textComposite.conversionOperation());
 //            TextCompositeService.getInstance().sortParagraphsInTextCompositeBySentenceAmount(textComposite);

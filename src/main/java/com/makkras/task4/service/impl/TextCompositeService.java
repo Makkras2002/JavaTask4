@@ -12,6 +12,7 @@ import com.makkras.task4.service.comparator.impl.ParagraphsBySentenceAmountCompa
 import java.util.*;
 
 public class TextCompositeService implements CustomCompositeService {
+    private final static String VOWELS_PATTERN = "[aeiouAEIOUаеёиоуюяАЕЁИОУЕЮЯэЭыЫ]";
     private static TextCompositeService instance;
     private TextCompositeService(){}
     public static TextCompositeService getInstance() {
@@ -85,6 +86,94 @@ public class TextCompositeService implements CustomCompositeService {
                tempCounter++;
            }
        }
+    }
+    public Map<TextComponent,Integer> findRepetitiveWordsAndTheirNumber(TextComponent text) throws InteractionException{
+        Map<TextComponent,Integer> repetitiveWordsAndTheirNumberMap = new HashMap<>();
+        if(text.getElementName() != TextElementName.TEXT){
+            throw new InteractionException("Invalid text element was passed into method.");
+        }else {
+            for(TextComponent paragraph : text.getTopChildren()){
+                for(TextComponent sentence : paragraph.getTopChildren()){
+                    for(TextComponent lexeme : sentence.getTopChildren()){
+                        boolean wordExists = false;
+                        for(TextComponent existingComponent : repetitiveWordsAndTheirNumberMap.keySet()){
+                            if(compareWordsInLexemes(existingComponent,lexeme) && !wordExists){
+                                int oldAmount = repetitiveWordsAndTheirNumberMap.get(existingComponent);
+                                repetitiveWordsAndTheirNumberMap.replace(existingComponent,++oldAmount);
+                                wordExists =true;
+                            }
+                        }
+                        if(!wordExists){
+                            repetitiveWordsAndTheirNumberMap.put(lexeme,1);
+                        }
+                    }
+                }
+            }
+        }
+        return repetitiveWordsAndTheirNumberMap;
+    }
+    public String countNumberOfConsonantsAndVowelsInSentence(Integer paragraphNumber,Integer sentenceInParagraphNumber,TextComponent text)throws InteractionException{
+        String result =null;
+        if(text.getElementName() != TextElementName.TEXT){
+            throw new InteractionException("Invalid text element was passed into method.");
+        }else {
+            if(paragraphNumber-1 >= 0 && paragraphNumber-1<text.getTopChildren().size()){
+                if(sentenceInParagraphNumber-1 >= 0 && sentenceInParagraphNumber-1 < text.getTopChildren().get(paragraphNumber-1).getTopChildren().size()){
+                    TextComponent sentence = text.getTopChildren().get(paragraphNumber-1).getTopChildren().get(sentenceInParagraphNumber-1);
+                    int vowelsNumber =0;
+                    int consonantsNumber =0;
+                    for(TextComponent lexeme : sentence.getTopChildren()){
+                        for(TextComponent character : lexeme.getTopChildren()){
+                            if(character.getElementName() == TextElementName.LETTER){
+                                if(character.conversionOperation().matches(VOWELS_PATTERN)){
+                                    vowelsNumber++;
+                                }else {
+                                    consonantsNumber++;
+                                }
+                            }
+                        }
+                    }
+                    return result = "vowels: " +vowelsNumber+ ", consonants: "+consonantsNumber+".";
+                }else {
+                    throw new InteractionException("Invalid sentence number.");
+                }
+            }else {
+                throw new InteractionException("Invalid paragraph number.");
+            }
+        }
+    }
+    private boolean compareWordsInLexemes(TextComponent lexeme1, TextComponent lexeme2)throws InteractionException {
+        if(lexeme1.getElementName() != TextElementName.LEXEME || lexeme2.getElementName() != TextElementName.LEXEME){
+            throw new InteractionException("Invalid text element was passed into method.");
+        }else {
+            List<String> lettersInL1 = new ArrayList<>();
+            List<String> lettersInL2 = new ArrayList<>();
+            for(TextComponent characterInL1 : lexeme1.getTopChildren()){
+                if(characterInL1.getElementName() == TextElementName.LETTER){
+                    lettersInL1.add(characterInL1.conversionOperation());
+                }
+            }
+            for(TextComponent characterInL2 : lexeme2.getTopChildren()){
+                if(characterInL2.getElementName() == TextElementName.LETTER){
+                    lettersInL2.add(characterInL2.conversionOperation());
+                }
+            }
+
+            if(lettersInL1.size() != lettersInL2.size()){
+                return false;
+            }else {
+                int letterCounterInListOfLetters=0;
+                for(String letter : lettersInL1){
+                    if(!letter.equals(lettersInL2.get(letterCounterInListOfLetters)) &&
+                            !letter.toUpperCase().equals(lettersInL2.get(letterCounterInListOfLetters)) &&
+                            !letter.toLowerCase().equals(lettersInL2.get(letterCounterInListOfLetters))){
+                        return false;
+                    }
+                    letterCounterInListOfLetters++;
+                }
+            }
+        }
+        return true;
     }
     private Integer getLettersAmountInLexeme(TextComponent lexeme) throws InteractionException {
         if(lexeme.getElementName() != TextElementName.LEXEME){

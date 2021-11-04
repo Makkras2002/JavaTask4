@@ -16,7 +16,7 @@ public class Main {
         try {
             TextComponent textComposite = handler.handleRequest(CustomFileReader.getInstance().readDataFromFile("filesrc/text.txt")).get(0);
             logger.info(textComposite.conversionOperation());
-            logger.info(TextCompositeService.getInstance().countNumberOfConsonantsAndVowelsInSentence(5,1,textComposite));
+            logger.info(TextCompositeService.getInstance().countNumberOfConsonantsAndVowelsInSentence(2,2,textComposite));
 //            Map<TextComponent,Integer> wordMap = TextCompositeService.getInstance().findRepetitiveWordsAndTheirNumber(textComposite);
 //            for (TextComponent a : wordMap.keySet()){
 //                if(wordMap.get(a) >1){

@@ -1,0 +1,1 @@
+2021-11-03 19:06:14 [main] [main] [35] ERROR com.makkras.task4.main.Main - com.makkras.task4.exception.InteractionException: Invalid paragraph number.

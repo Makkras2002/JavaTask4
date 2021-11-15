@@ -1,0 +1,2 @@
+2021-11-03 18:13:28 [main] [main] [37] ERROR com.makkras.task4.main.Main - com.makkras.task4.exception.InteractionException: Invalid text element was passed into method.
+2021-11-03 18:13:34 [main] [main] [37] ERROR com.makkras.task4.main.Main - com.makkras.task4.exception.InteractionException: Invalid text element was passed into method.

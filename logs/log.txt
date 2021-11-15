@@ -1,1 +1,1 @@
-2021-11-03 19:09:21 [main] [main] [35] ERROR com.makkras.task4.main.Main - com.makkras.task4.exception.InteractionException: Invalid sentence number.
+2021-11-15 13:29:34 [main] [testErrorElementPassingExceptionThrowing] [42] ERROR makkras.task4.service.impl.TextCompositeServiceTest - Invalid text element was passed into method.

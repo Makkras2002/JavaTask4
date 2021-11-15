@@ -2,7 +2,6 @@ package com.makkras.task4.service.comparator.impl;
 
 import com.makkras.task4.entity.TextComponent;
 import com.makkras.task4.entity.TextElementName;
-import com.makkras.task4.exception.InteractionException;
 import com.makkras.task4.service.comparator.CustomCompositeComparator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
